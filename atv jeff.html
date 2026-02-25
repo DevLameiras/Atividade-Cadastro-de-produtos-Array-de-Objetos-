@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Atividade</title>
+	<style>
+
+		table {
+			border-collapse: collapse;
+			margin-top: 10px;
+			
+		}
+
+		th, td {
+			border: 1px solid;
+			
+			
+			
+		}
+
+		th {
+			font-weight: bold;
+		}
+
+		
+
+	</style>
+</head>
+<body>
+	<h1>Cadastro de Produtos (Array de Objetos)</h1>
+
+	<p>Produto:<input id="NOME" type="text" placeholder="Digite o nome do Produto">
+
+		Preço (R$): <input id="PRECO" type="number" placeholder="Ex: 99" min="0">
+
+		Quantidade <input id="QTD" type="number" placeholder="Ex: 2" min="0">
+
+		<button onclick="adicionar()">Adicionar produto</button>
+
+		<button onclick="mostrar()">Listar produtos</button>
+		<button onclick="resumo()">Resumo</button>
+		<button onclick="limparTudo()">Limpar tudo</button>
+	</p> 
+	<hr>
+
+	<h3>Remover por índice
+		<input id="removeInd" type="number" placeholder="Ex: 0" min="0">
+		<button onclick="removerPorindice()">Remover</butto>	
+	</h3>
+
+	<h3 id="title"></h3>
+
+	<p id="TEXT"></p>
+
+	<div id="areaResumo"></div>
+
+	<div id= areaTabela></div>
+
+
+	<script>
+
+		let listaArray = [];
+		let title = document.getElementById('title')
+	
+
+		function adicionar() {
+			let NOME = document.getElementById("NOME").value
+			let PRECO = document.getElementById("PRECO").value
+			let QTD = document.getElementById("QTD").value
+
+			TEXT.innerText =""
+			title.innerText = "Produtos adicionados"
+
+
+			let areaRes = document.getElementById("areaResumo");
+			areaRes.innerHTML = "";
+
+			if (!NOME || !PRECO || !QTD){
+				alert ("preencha todos os campos!")
+
+			} else{
+
+			let produto = {
+			nome: NOME,
+			preco: PRECO,
+			qtd: QTD
+		};
+
+			listaArray.push(produto);
+
+			let lista = document.getElementById("LISTA");
+
+			
+
+			document.getElementById("NOME").value = "";
+			document.getElementById("PRECO").value = "";
+			document.getElementById("QTD").value = "";
+
+			let TEXT = document.getElementById("TEXT")
+
+			TEXT.innerText = `Produto adicionado. Total: ${listaArray.length}`
+
+			document.getElementById("areaTabela").innerHTML = ""
+
+			
+		}}
+
+		function mostrar() {
+
+			let areaRes = document.getElementById("areaResumo");
+			areaRes.innerHTML = "";
+
+
+			TEXT.innerText =""
+			title.innerText = "Tabela de Produtos"
+
+
+			let area = document.getElementById("areaTabela");
+			area.innerHTML = "";
+
+			let tabela = document.createElement("table");
+			tabela.border = "1";
+
+			let cabecalho = document.createElement("tr");
+
+			cabecalho.innerHTML = `
+
+					<th>Índice</th>
+					<th>Nome</th>
+					<th>Preço</th>
+					<th>Quantidade</th>
+					<th>Subtotal</th>
+					
+					`;
+
+			tabela.appendChild(cabecalho);
+			
+			for (let i = 0; i < listaArray.length; i++){
+				
+				let linha = document.createElement("tr");
+
+				let precoTable = parseFloat(listaArray[i].preco).toFixed(2);
+
+				let subtotal = listaArray[i].preco * listaArray[i].qtd;
+
+				subtotal = subtotal.toFixed(2)
+
+				
+				linha.innerHTML = `
+
+					<td>${i}</td>
+					<td>${listaArray[i].nome}</td>
+					<td>${precoTable}</td>	
+					<td>${listaArray[i].qtd}</td>		
+					<td>${subtotal}</td>		
+
+				`;
+
+				tabela.appendChild(linha);
+
+				area.appendChild(tabela);
+				
+			};
+		};
+
+		function resumo () {
+			let listaQtd = [];
+			let SOMAqtd = 0;
+			document.getElementById("areaTabela").innerHTML = ""
+			TEXT.innerText = ""
+			
+			for (let i= 0; i < listaArray.length; i++){
+				
+				let somaQtd = parseInt(listaArray[i].qtd);
+				
+				listaQtd.push(somaQtd)
+			};
+			
+			parseInt(listaQtd)
+			listaQtd.forEach(somar => {
+				SOMAqtd += somar;
+
+			});
+
+			
+			let SOMApreco = 0
+
+			for (let i= 0; i < listaArray.length; i++){
+				
+				let somaPreco = parseFloat(listaArray[i].preco);
+				let somaQtd = parseInt(listaArray[i].qtd);
+				
+			};
+			
+		
+			for (let i= 0; i < listaArray.length; i++){
+				
+				let somaPreco = parseFloat(listaArray[i].preco);
+				let somaQtd = parseInt(listaArray[i].qtd);
+				
+				SOMApreco += somaPreco * somaQtd
+			};
+			
+
+
+			let areaRes = document.getElementById("areaResumo");
+			areaRes.innerHTML = "";
+
+			title.innerText = "Resumo"
+
+
+			let ResumoTotal = document.createElement("p");
+			let ResumoQtd = document.createElement("p");
+			let ResumoPreco = document.createElement("p");
+
+			ResumoTotal.innerHTML = `- Total de produtos (linhas): ${listaArray.length}`;
+			ResumoQtd.innerHTML = `- Total de itens (somando quantidade): ${SOMAqtd}`;
+			ResumoPreco.innerText = `Total do estoque: R$ ${SOMApreco.toFixed(2)}`
+
+			areaRes.appendChild(ResumoTotal);
+			areaRes.appendChild(ResumoQtd);
+			areaRes.appendChild(ResumoPreco);
+			
+		}
+
+		function limparTudo (){
+
+			document.getElementById("areaTabela").innerHTML = ""
+			document.getElementById("areaResumo").innerHTML =""
+
+			listaArray = [];
+			TEXT.innerText = "Todos os produtos foram removidos";
+		};
+
+		function removerPorindice () {
+
+			document.getElementById("title").innerText = ""
+			document.getElementById("areaTabela").innerHTML = "";
+			document.getElementById("areaResumo").innerHTML ="";
+
+		let removerIndice = document.getElementById("removeInd").value;
+
+			if (removerIndice  >=0 &&  removerIndice <listaArray.length){
+				
+			listaArray.splice(removerIndice,1);
+
+			document.getElementById("removeInd").value = "";
+
+			TEXT.innerHTML = `indice ${removerIndice} removido com sucesso `;
+
+			} else{
+
+				alert("Digite um valor de indice válido");
+
+			
+		};
+	};
+
+
+
+
+	</script>
+	
+</body>
+</html>
