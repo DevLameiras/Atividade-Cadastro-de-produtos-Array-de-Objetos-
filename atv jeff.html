@@ -152,9 +152,9 @@
 
 					<td>${i}</td>
 					<td>${listaArray[i].nome}</td>
-					<td>${precoTable}</td>	
+					<td>R$ ${precoTable}</td>	
 					<td>${listaArray[i].qtd}</td>		
-					<td>${subtotal}</td>		
+					<td>R$ ${subtotal}</td>		
 
 				`;
 
@@ -217,7 +217,7 @@
 
 			ResumoTotal.innerHTML = `- Total de produtos (linhas): ${listaArray.length}`;
 			ResumoQtd.innerHTML = `- Total de itens (somando quantidade): ${SOMAqtd}`;
-			ResumoPreco.innerText = `Total do estoque: R$ ${SOMApreco.toFixed(2)}`
+			ResumoPreco.innerText = `- Total do estoque: R$ ${SOMApreco.toFixed(2)}`
 
 			areaRes.appendChild(ResumoTotal);
 			areaRes.appendChild(ResumoQtd);
