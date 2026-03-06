@@ -14,65 +14,142 @@
 		}
 
 		th, td {
-			border: 1px solid;
-			
-			
-			
+			border: 1px solid;	
+		}
+
+		td{
+			padding: 0.8vh;
 		}
 
 		th {
 			font-weight: bold;
+			justify-content: center;
+			align-items: center;
+			height: 4vh;
+			padding: 1vh;
+		}
+
+		body{
+			background-color: #a9a9a9;
+			background-image: url('fundoAzul.jpeg');
+			background-repeat: no-repeat;
+  			background-size: cover;
+  			background-attachment: fixed; 
+		}
+
+		
+
+		
+		input {
+			width: 40vh;
+			height: 50px;
+			border-radius: 10px;
+			margin: 1vh auto;
+			border-color: transparent;
+			
+		}
+		
+		h1 {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 		}
 
 		.content{
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			margin-top: 10vh;
 		}
 
 		.card {
-			background-color: aqua;
-			height: 70vh;
-			width: 150vh;
-			border-radius: 10px;
+			background: rgba(255, 255, 255, 0.006);
+			backdrop-filter: blur(1vh);
+
+			height: auto;
+			width: 80vh;
+			border-radius: 2vh;
+			border: 0.1vh solid rgb (255,255,255,0.3);
+			color: rgb(255, 255, 255);
+			
+
+			
 		}
 		.inputs {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			flex-direction: column;
-			font-size: 3vh;
-		}
-
-		input {
-			width: 40vh;
-			height: 50px;
-			border-radius: 10px;
-
-		}
-		
-		#botao{
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			gap: 0.5vh;
-			margin: 30px auto;
-			width: 40vh;
-			height: 6vh;
-			border-radius: 1vh;
 			
 		}
+		
 		.botoes{
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			flex-direction: row;
-			gap: 1vh;
+			gap: 0.8vh;
+		
 		}
-		.cssBotao{
-			width: 14vh;
 
-		}
+		.cssBotao{
+			width: 13vh;
+			border-radius: 0.5vh;
+			border-color: transparent;
+			margin: 1vh 0;
+		
+	}
+	
+	
+		#remover {
+			width: 40.9vh;
+			height: 6vh;
+			border-radius: 1vh;
+			border-color: transparent;
+	}
+	
+		#botao{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 0.5vh;
+			margin: 0.6vh auto;
+			width: 40.9vh;
+			height: 6vh;
+			border-radius: 1vh;
+			border-color: transparent;
+	}
+
+		#title {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 3vh 0; 
+	}
+
+		#TEXT {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+	}
+
+		#areaResumo {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+	}
+
+		#areaTabela {
+
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			margin: 0 0 1vh;
+	}
+
+	
 
 		
 
@@ -81,19 +158,22 @@
 	</style>
 </head>
 <body>
-	<h1>Cadastro de Produtos (Array de Objetos)</h1>
+	<div class="content">
+		
+		<div class="card">
 
-<div class="content">
+		<h1>Cadastro de Produtos</h1>
 
-	<div class="card">
-		<div class="inputs">
-	<p>Produto	</p><input id="NOME" type="text" placeholder="Digite o nome do Produto">
+			<div class="inputs">
+	
+			
+		<input id="NOME" type="text" placeholder="Digite o nome do Produto">
 
-		<p> Preço (R$) </p><input id="PRECO" type="number" placeholder="Ex: 99" min="0">
+		<input id="PRECO" type="number" placeholder="Digite o preço do Produto" min="0">
 
-		 <p> Quantidade </p><input id="QTD" type="number" placeholder="Ex: 2" min="0">
+		 <input id="QTD" type="number" placeholder="Digite a quantidade de produtos" min="0">
 
-		</div>
+			</div>
 
 		<button id="botao" onclick="adicionar()">Adicionar produto</button>
 		
@@ -101,16 +181,17 @@
 
 		<button class="cssBotao" onclick="mostrar()">Listar produtos</button>
 		<button class="cssBotao" onclick="resumo()">Resumo</button>
-		<button class="botao" onclick="limparTudo()">Limpar tudo</button>
+		<button class="cssBotao" onclick="limparTudo()">Limpar tudo</button>
+	</div>
 
-		</div>
-	
+		
+	<div class="inputs">
 
-	<h3>Remover por índice
-		<input id="removeInd" type="number" placeholder="Ex: 0" min="0">
-		<button onclick="removerPorindice()">Remover</butto>	
-	</h3>
+		<input id="removeInd" type="number" placeholder="Limpar por Índice" min="0">
 
+		<button id="remover" onclick="removerPorindice()">Remover</butto>	
+
+	</div>
 	<h3 id="title"></h3>
 
 	<p id="TEXT"></p>
@@ -118,10 +199,9 @@
 	<div id="areaResumo"></div>
 
 	<div id= areaTabela></div>
+
+		</div>
 	</div>
-
-</div>
-
 	<script>
 
 		let listaArray = [];
