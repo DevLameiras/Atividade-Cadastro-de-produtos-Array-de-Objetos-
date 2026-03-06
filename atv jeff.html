@@ -24,6 +24,58 @@
 			font-weight: bold;
 		}
 
+		.content{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.card {
+			background-color: aqua;
+			height: 70vh;
+			width: 150vh;
+			border-radius: 10px;
+		}
+		.inputs {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			font-size: 3vh;
+		}
+
+		input {
+			width: 40vh;
+			height: 50px;
+			border-radius: 10px;
+
+		}
+		
+		#botao{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 0.5vh;
+			margin: 30px auto;
+			width: 40vh;
+			height: 6vh;
+			border-radius: 1vh;
+			
+		}
+		.botoes{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: row;
+			gap: 1vh;
+		}
+		.cssBotao{
+			width: 14vh;
+
+		}
+
+		
+
 		
 
 	</style>
@@ -31,19 +83,28 @@
 <body>
 	<h1>Cadastro de Produtos (Array de Objetos)</h1>
 
-	<p>Produto:<input id="NOME" type="text" placeholder="Digite o nome do Produto">
+<div class="content">
 
-		Preço (R$): <input id="PRECO" type="number" placeholder="Ex: 99" min="0">
+	<div class="card">
+		<div class="inputs">
+	<p>Produto	</p><input id="NOME" type="text" placeholder="Digite o nome do Produto">
 
-		Quantidade <input id="QTD" type="number" placeholder="Ex: 2" min="0">
+		<p> Preço (R$) </p><input id="PRECO" type="number" placeholder="Ex: 99" min="0">
 
-		<button onclick="adicionar()">Adicionar produto</button>
+		 <p> Quantidade </p><input id="QTD" type="number" placeholder="Ex: 2" min="0">
 
-		<button onclick="mostrar()">Listar produtos</button>
-		<button onclick="resumo()">Resumo</button>
-		<button onclick="limparTudo()">Limpar tudo</button>
-	</p> 
-	<hr>
+		</div>
+
+		<button id="botao" onclick="adicionar()">Adicionar produto</button>
+		
+		<div class="botoes">
+
+		<button class="cssBotao" onclick="mostrar()">Listar produtos</button>
+		<button class="cssBotao" onclick="resumo()">Resumo</button>
+		<button class="botao" onclick="limparTudo()">Limpar tudo</button>
+
+		</div>
+	
 
 	<h3>Remover por índice
 		<input id="removeInd" type="number" placeholder="Ex: 0" min="0">
@@ -57,7 +118,9 @@
 	<div id="areaResumo"></div>
 
 	<div id= areaTabela></div>
+	</div>
 
+</div>
 
 	<script>
 
@@ -152,9 +215,9 @@
 
 					<td>${i}</td>
 					<td>${listaArray[i].nome}</td>
-					<td>R$ ${precoTable}</td>	
+					<td>${precoTable}</td>	
 					<td>${listaArray[i].qtd}</td>		
-					<td>R$ ${subtotal}</td>		
+					<td>${subtotal}</td>		
 
 				`;
 
@@ -217,7 +280,7 @@
 
 			ResumoTotal.innerHTML = `- Total de produtos (linhas): ${listaArray.length}`;
 			ResumoQtd.innerHTML = `- Total de itens (somando quantidade): ${SOMAqtd}`;
-			ResumoPreco.innerText = `- Total do estoque: R$ ${SOMApreco.toFixed(2)}`
+			ResumoPreco.innerText = `Total do estoque: R$ ${SOMApreco.toFixed(2)}`
 
 			areaRes.appendChild(ResumoTotal);
 			areaRes.appendChild(ResumoQtd);
